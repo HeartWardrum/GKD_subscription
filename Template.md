@@ -55,6 +55,50 @@
 
 </details>
 
+## 🔧 Fork 自建源：改完规则后如何刷新订阅链接
+
+本 Fork 的个人订阅地址，内容就是 `main` 分支上的 `dist/gkd.json5`（当前 `v{{VERSION}}`）
+
+```txt
+https://raw.githubusercontent.com/HeartWardrum/GKD_subscription/main/dist/gkd.json5
+https://fastly.jsdelivr.net/gh/HeartWardrum/GKD_subscription@main/dist/gkd.json5
+https://cdn.jsdelivr.net/gh/HeartWardrum/GKD_subscription@main/dist/gkd.json5
+```
+
+只改 `src/apps/*.ts` 不会让这些链接发生变化 —— 手机读取的是 `dist/gkd.json5`，必须重新构建并把构建产物一起提交
+
+```bash
+pnpm run check      # 类型检查 + 订阅校验，不通过不要继续构建
+
+pnpm run build      # 生成 dist/gkd.json5 / dist/README.md / dist/CHANGELOG.md，并刷新本 README
+
+git add src/apps/tv.danmaku.bili.ts README.md dist   # 换成你这次改的源文件
+git commit -m "feat: 哔哩哔哩 功能类-xxx规则名"
+git push origin main
+```
+
+- `raw.githubusercontent.com` 推送后立即生效；jsdelivr 命中旧缓存时访问 `https://purge.jsdelivr.net/gh/HeartWardrum/GKD_subscription@main/dist/gkd.json5` 清理
+- 手机 GKD 订阅页下拉就能检测更新；`功能类` 这类分类默认关闭，新增规则组需要手动打开
+- 每执行一次 `pnpm run build` 版本号都会 +1（即使规则没改动），不要空跑构建
+- 只改文档不动规则时，用下面的命令单独刷新本 README，版本号保持不变
+
+  ```bash
+  pnpm exec tsx -e "import('./scripts/updateReadMeMd.ts').then((m) => m.updateReadMeMd())"
+  ```
+
+> [!NOTE]
+> 本 README 由 `Template.md` 生成，直接改 `README.md` 会在下次构建时被覆盖；要补充说明请改 `Template.md`。
+
+### 用 GitHub Actions 构建（可选，需一次性开权限）
+
+Fork 上 `build_release` 的定时触发默认不执行，且 `GITHUB_TOKEN` 默认只读，产物会在「推送代码到远程仓库」这一步报 `Permission to ... denied to github-actions[bot]`。要用 CI 出产物：
+
+1. 仓库 Settings → Actions → General → Workflow permissions → 选择 **Read and write permissions**
+2. `gh workflow run build_release.yml --repo HeartWardrum/GKD_subscription --ref main`
+3. 工作流会构建 `dist`、提交 `chore: v<版本号>`、打 tag 并创建 Release
+
+上游的 CloudFlare 源 `gkd-subscription-667.pages.dev` 属于上游自己的部署，不包含本 Fork 的改动。
+
 ## 📑说明
 
 - **致力于编写效率最高、误触最低、覆盖最全面的规则**
