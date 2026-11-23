@@ -978,5 +978,62 @@ export default defineGkdApp({
         },
       ],
     },
+    {
+      key: 35,
+      name: '功能类-自动跳过推广/漫剧/预约/小火箭',
+      desc: '竖屏播放时检测到各种推广标识自动上滑跳过该视频',
+      fastQuery: true,
+      actionCd: 1500,
+      activityIds: [
+        'com.bilibili.video.story.StoryVideoActivity',
+        'com.bilibili.video.story.StoryTransparentActivity',
+      ],
+      rules: [
+        {
+          key: 0,
+          name: '检测并跳过：创作推广',
+          action: 'swipe',
+          swipeArg: {
+            start: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.8' },
+            end: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.2' },
+            duration: 300,
+          },
+          matches: '[vid="story_title"][visibleToUser=true]',
+        },
+        {
+          key: 1,
+          name: '检测并跳过：短剧,漫剧',
+          action: 'swipe',
+          swipeArg: {
+            start: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.8' },
+            end: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.2' },
+            duration: 300,
+          },
+          matches: '[vid="entry_type"][text="漫剧"][visibleToUser=true]',
+        },
+        {
+          key: 2,
+          name: '检测并跳过：付费推广',
+          action: 'swipe',
+          swipeArg: {
+            start: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.8' },
+            end: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.2' },
+            duration: 300,
+          },
+          matches: '[vid="charge_widget_start_text"][visibleToUser=true]',
+        },
+        {
+          key: 3,
+          name: '检测并跳过：含图标小火箭推广(ImageSpan占位)',
+          action: 'swipe',
+          swipeArg: {
+            start: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.8' },
+            end: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.2' },
+            duration: 300,
+          },
+          matches: '[vid="title"][text~=".* +0$"][visibleToUser=true]',
+        },
+      ],
+    },
   ],
 });
