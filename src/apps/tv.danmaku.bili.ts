@@ -983,7 +983,8 @@ export default defineGkdApp({
       name: '功能类-自动跳过推广/漫剧/预约/小火箭',
       desc: '竖屏播放时检测到各种推广标识自动上滑跳过该视频',
       fastQuery: true,
-      actionCd: 1500,
+      actionCd: 1200,
+      actionDelay: 200, // 让竖屏页完全切过去再滑，避免滑在半程被回弹
       activityIds: [
         'com.bilibili.video.story.StoryVideoActivity',
         'com.bilibili.video.story.StoryTransparentActivity',
@@ -1031,7 +1032,8 @@ export default defineGkdApp({
             end: { x: 'screenWidth * 0.5', y: 'screenHeight * 0.2' },
             duration: 300,
           },
-          matches: '[vid="title"][text~=".* +0$"][visibleToUser=true]',
+          matches:
+            '[vid="title"][text~="(?s).*播放 +[0-9]+$"][visibleToUser=true]',
         },
       ],
     },

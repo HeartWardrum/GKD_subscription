@@ -1,6 +1,6 @@
 [![SVG Banners](https://svg-banners.vercel.app/api?type=origin&text1=GKD第三方订阅规则&text2=💖%20GKD_subscription&width=800&height=350)](https://github.com/Lin-arm/GKD_subscription)
 
-[![Release](https://img.shields.io/badge/发行版-v643-blue)](https://github.com/Lin-arm/GKD_subscription/releases/latest)
+[![Release](https://img.shields.io/badge/发行版-v644-blue)](https://github.com/Lin-arm/GKD_subscription/releases/latest)
 [![已适配应用](https://img.shields.io/badge/已适配应用-1010-brightgreen)](./dist/README.md#应用规则)
 [![全局规则组](https://img.shields.io/badge/全局规则组-3-blueviolet)](./dist/README.md#全局规则)
 [![应用规则组](https://img.shields.io/badge/应用规则组-2530-orange)](./dist/README.md#应用规则)
@@ -57,7 +57,7 @@
 
 ## 🔧 Fork 自建源：改完规则后如何刷新订阅链接
 
-本 Fork 的个人订阅地址，内容就是 `main` 分支上的 `dist/gkd.json5`（当前 `v643`）
+本 Fork 的个人订阅地址，内容就是 `main` 分支上的 `dist/gkd.json5`（当前 `v644`）
 
 ```txt
 https://raw.githubusercontent.com/HeartWardrum/GKD_subscription/main/dist/gkd.json5
@@ -138,7 +138,7 @@ Fork 上 `build_release` 的定时触发默认不执行，且 `GITHUB_TOKEN` 默
 
 ## 🥇感谢以下开发者的贡献
 
-![img](https://contrib.rocks/image?repo=Lin-arm/GKD_subscription&max=200&_v=643)
+![img](https://contrib.rocks/image?repo=Lin-arm/GKD_subscription&max=200&_v=644)
 
 <!-- repobeats 已失效 -->
 <!-- ![Alt](https://repobeats.axiom.co/api/embed/db6f46a4bdc4e760fb51976db276f1febef5bdce.svg "报告分析图") -->
